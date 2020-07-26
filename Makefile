@@ -18,14 +18,15 @@ calicoctl:
 	 kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
 
 
-.PHONY: kudo
-kudo:
+.PHONY: cert-manager
+cert-manager:
 	kind delete cluster
 	kind create cluster --config kudo/kind-kudo.yaml
 	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
 	kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
 	kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
-	kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.yaml
+	kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl.yaml
+	kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.yaml
 #	kubectl kudo init
 
 
