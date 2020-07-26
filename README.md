@@ -1,3 +1,4 @@
+![Kind Calico](https://github.com/mchirico/kind/workflows/Kind%20Calico/badge.svg)
 # kind
 
 
