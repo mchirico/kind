@@ -55,7 +55,13 @@ jobs:
    # Make
     - name: kubectl
       run: |
-        kubectl get po -A
+        num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+        while [ $num -gt 3 ]; 
+        do 
+          num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+          sleep 3
+          kubectl get pods --field-selector=status.phase!=Running -A
+        done
 
 
 
