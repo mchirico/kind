@@ -52,7 +52,7 @@ jobs:
         make calico
 
 
-   # Make
+   # Wait until ready
     - name: kubectl
       run: |
         num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
@@ -63,5 +63,25 @@ jobs:
           kubectl get pods --field-selector=status.phase!=Running -A
         done
 
+
+   # Install sample
+    - name: make sample
+      run: |
+        make sample
+        cd node-starter-express
+        make
+        make kind
+        cd k8s/kind/
+        kubectl apply -f .
+        
+
+   # 
+    - name: view
+      run: |
+        sleep 20
+        kubectl go po -A
+        curl localhost
+
+  
 
 
