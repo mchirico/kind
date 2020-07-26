@@ -23,7 +23,7 @@ kudo:
 #	kubectl kudo init
 
 
-.PHONY: docker-build
+.PHONY: sample
 sample:
 	rm -rf express.zip
 	rm -rf node-starter-express
@@ -57,13 +57,6 @@ push:
 pull:
 	docker pull gcr.io/$(PROJECT)/$(NAME):$(TAG) 
 
-.PHONY: deploy
-deploy:
-	gcloud config set gcloudignore/enabled false --project $(PROJECT)
-	gcloud builds submit --tag gcr.io/$(PROJECT)/$(NAME)cloud --project $(PROJECT) --timeout 35m23s
-	gcloud run deploy $(NAME)cloud --image gcr.io/$(PROJECT)/$(NAME)cloud \
-              --platform managed --allow-unauthenticated --project $(PROJECT) \
-              --region us-east1 --port 3000 --max-instances 3  --memory 128Mi
 
 
 .PHONY: run
