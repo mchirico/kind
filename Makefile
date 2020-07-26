@@ -3,7 +3,7 @@ NAME = kindstarter
 TAG = dev
 
 
-.PHONY: docker-build
+.PHONY: calico
 calico:
 	kind delete cluster
 	kind create cluster --config calico/kind-calico.yaml
