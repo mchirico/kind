@@ -12,6 +12,11 @@ calico:
 	kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 
 
+.PHONY: calicoctl
+calicoctl:
+	 kubectl apply -f https://docs.projectcalico.org/manifests/calicoctl.yaml
+
+
 .PHONY: kudo
 kudo:
 	kind delete cluster
