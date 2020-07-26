@@ -79,7 +79,7 @@ jobs:
     - name: view
       run: |
         sleep 20
-        kubectl go po -A
+        kubectl get po -A
         curl localhost
 
   
