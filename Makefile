@@ -12,6 +12,17 @@ calico:
 	kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
 
 
+.PHONY: kudo
+kudo:
+	kind delete cluster
+	kind create cluster --config kudo/kind-kudo.yaml
+	kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/kind/deploy.yaml
+	kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+	kubectl create -f https://docs.projectcalico.org/manifests/custom-resources.yaml
+	kubectl apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.16.0/cert-manager.yaml
+#	kubectl kudo init
+
+
 .PHONY: docker-build
 sample:
 	rm -rf express.zip
@@ -21,6 +32,13 @@ sample:
 	cd node-starter-express
 	npm install
 
+
+# Danger This Cleans Up Everything!
+.PHONY: cleanup
+cleanup:
+	docker stop $(docker ps -aq)
+	docker rm $(docker ps -aq)
+	docker rmi $(docker images -q)
 
 
 .PHONY: docker-build
