@@ -1,0 +1,104 @@
+
+name: Kind Kudo
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+     
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name: Setup Go
+      uses: actions/setup-go@v2.1.1
+      with:
+        go-version: 1.14
+
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v2.1.1
+      with:
+       check-latest: true
+ 
+ 
+    # install Kind
+    - name: Install Kind
+      run: |
+        GO111MODULE="on" go get sigs.k8s.io/kind@v0.8.1
+        kind version
+
+
+    # install kubectl
+    - name: Install kubectl
+      run: |
+        curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
+        chmod +x ./kubectl
+        sudo mv ./kubectl /usr/bin/kubectl
+
+
+    # install Kudo
+    - name: Install Kudo
+      run: |
+        curl -LO https://github.com/kudobuilder/kudo/releases/download/v0.15.0/kubectl-kudo_0.15.0_linux_arm64
+        mv kubectl-kudo_0.15.0_linux_arm6 kudo
+        chmod +x kudo
+        sudo mv kudo /usr/local/bin/kudo
+
+
+    # Make
+    - name: make cert-managero
+      run: |
+        make cert-manager
+
+
+   # Wait until ready
+    - name: kubectl
+      run: |
+        num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+        while [ $num -gt 3 ]; 
+        do 
+          num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
+          sleep 3
+          kubectl get pods --field-selector=status.phase!=Running -A
+        done
+
+
+   # kudo init
+    - name: kudo init
+      run: |
+        kudo init
+
+
+
+   # Install sample
+    - name: make sample
+      run: |
+        make sample
+        cd node-starter-express
+        make
+        make kind
+        cd k8s/kind/
+        kubectl apply -f .
+        
+
+   # 
+    - name: view
+      run: |
+        sleep 20
+        kubectl get po -A
+        curl localhost
+
+  
+
+
