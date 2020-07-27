@@ -93,6 +93,7 @@ jobs:
    # Wait until ready
     - name: kubectl
       run: |
+        sleep 40
         num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
         while [ $num -gt 3 ];
         do
@@ -111,6 +112,7 @@ jobs:
    # Wait until ready
     - name: kubectl
       run: |
+        sleep 30
         num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
         while [ $num -gt 3 ];
         do
