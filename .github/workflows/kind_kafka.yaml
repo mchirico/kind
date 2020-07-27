@@ -119,6 +119,14 @@ jobs:
         done
 
 
+   # Check it works
+    - name: Check endpoints
+      run: |
+        r=$(kubectl get endpoints kafka-instance-svc -o json | jq -r '.subsets[].addresses[].hostname'|wc -l)
+        [[ $r -eq 3 ]] && echo "Got 3 endpoints as expected"
+
+
+
    # Install sample
     - name: make sample
       run: |
