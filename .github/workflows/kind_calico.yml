@@ -30,8 +30,8 @@ jobs:
       uses: actions/setup-node@v2.1.1
       with:
        check-latest: true
- 
- 
+
+
     # install Kind
     - name: Install Kind
       run: |
@@ -45,7 +45,7 @@ jobs:
         curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl
         chmod +x ./kubectl
         sudo mv ./kubectl /usr/bin/kubectl
- 
+
     # Make
     - name: make calico
       run: |
@@ -73,15 +73,15 @@ jobs:
         make kind
         cd k8s/kind/
         kubectl apply -f .
-        
 
-   # 
+
+   #
     - name: view
       run: |
         sleep 20
         kubectl get po -A
         curl localhost
 
-  
+
 
 
