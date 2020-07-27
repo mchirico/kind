@@ -51,7 +51,7 @@ jobs:
     - name: Install Kudo
       run: |
         curl -LO https://github.com/kudobuilder/kudo/releases/download/v0.15.0/kubectl-kudo_0.15.0_linux_arm64
-        mv kubectl-kudo_0.15.0_linux_arm6 kudo
+        mv kubectl-kudo_0.15.0_linux_arm64 kudo
         chmod +x kudo
         sudo mv kudo /usr/local/bin/kudo
 
