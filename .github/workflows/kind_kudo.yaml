@@ -11,7 +11,7 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-     
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -30,8 +30,8 @@ jobs:
       uses: actions/setup-node@v2.1.1
       with:
        check-latest: true
- 
- 
+
+
     # install Kind
     - name: Install Kind
       run: |
@@ -69,8 +69,8 @@ jobs:
     - name: kubectl
       run: |
         num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
-        while [ $num -gt 3 ]; 
-        do 
+        while [ $num -gt 3 ];
+        do
           num=$(kubectl get pods --field-selector=status.phase!=Running -A|wc -l)
           sleep 3
           kubectl get pods --field-selector=status.phase!=Running -A
@@ -93,15 +93,15 @@ jobs:
         make kind
         cd k8s/kind/
         kubectl apply -f .
-        
 
-   # 
+
+   #
     - name: view
       run: |
         sleep 20
         kubectl get po -A
         curl localhost
 
-  
+
 
 
