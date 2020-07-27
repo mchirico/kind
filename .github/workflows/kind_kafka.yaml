@@ -121,10 +121,16 @@ jobs:
 
 
    # Check it works
-    - name: Check endpoints
+    - name: kubectl get po 10,20,60
       run: |
-        kubectl get endpoints kafka-instance-svc -o json
-        jq
+        kubectl get po -A
+        sleep 10
+        kubectl get po -A
+        sleep 20
+        kubectl get po -A
+        sleep 60
+        kubectl get po -A
+
 
 
 
