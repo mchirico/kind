@@ -39,11 +39,6 @@ jobs:
         kind version
 
 
-    # install utils
-    - name: Install utils, jq
-      run: |
-        sudo apt-get install jq
-
 
     # install kubectl
     - name: Install kubectl
@@ -128,9 +123,8 @@ jobs:
    # Check it works
     - name: Check endpoints
       run: |
-        r=$(kubectl get endpoints kafka-instance-svc -o json | jq -r '.subsets[].addresses[].hostname'|wc -l)
-        [[ $r -eq 3 ]] && echo "We got 3 endpoints as expected"
-        kubectl get endpoints kafka-instance-svc -o json | jq -r '.subsets[].addresses[].hostname'
+        kubectl get endpoints kafka-instance-svc -o json
+        jq
 
 
 
