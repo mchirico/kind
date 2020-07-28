@@ -29,6 +29,15 @@ cert-manager:
 	kubectl apply -f calico/cert-manager.yaml
 #	kubectl kudo init
 
+.PHONY: packages
+packages:
+	kubectl kudo init
+	kubectl kudo install zookeeper
+	kubectl kudo install kafka
+	kubectl kudo install redis
+	kubectl kudo install mysql
+	kubectl kudo install rabbitmq
+
 
 .PHONY: sample
 sample:
