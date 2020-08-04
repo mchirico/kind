@@ -29,6 +29,20 @@ cert-manager:
 	kubectl apply -f calico/cert-manager.yaml
 #	kubectl kudo init
 
+
+.PHONY: cert-manager
+cert-manager-mce:
+	kind delete cluster
+	kind create cluster --config calico-mce/kind-calico.yaml
+	kubectl apply -f calico-mce/ingress-nginx.yaml
+	kubectl apply -f calico/tigera-operator.yaml
+	kubectl apply -f calico/calicoNetwork.yaml
+	kubectl apply -f calico/calicoctl.yaml
+	kubectl apply -f calico/cert-manager.yaml
+#	kubectl kudo init
+
+
+
 .PHONY: packages
 packages:
 	kubectl kudo init
