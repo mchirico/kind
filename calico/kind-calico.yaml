@@ -16,6 +16,17 @@ nodes:
     hostPort: 80
     protocol: TCP
 - role: worker
+  extraMounts:
+  - containerPath: /tmp/hostpath_pv
+    hostPath: /tmp/hostpath_pv
+    readOnly: False
 - role: worker
-
-
+  extraMounts:
+  - containerPath: /tmp/hostpath_pv
+    hostPath: /tmp/hostpath_pv
+    readOnly: False
+- role: worker
+  extraMounts:
+  - containerPath: /tmp/hostpath_pv
+    hostPath: /tmp/hostpath_pv
+    readOnly: False
