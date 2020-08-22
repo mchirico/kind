@@ -2,6 +2,9 @@ PROJECT = septapig
 NAME = kindstarter
 TAG = dev
 
+export GOPATH=${HOME}/gopath
+export GOBIN=${HOME}/gopath/bin
+
 
 .PHONY: calico
 calico:
@@ -20,6 +23,25 @@ calicoctl:
 
 .PHONY: cert-manager
 cert-manager:
+	kind delete cluster
+	kind create cluster --config calico/kind-calico.yaml
+	kubectl apply -f calico/ingress-nginx.yaml
+	kubectl apply -f calico/tigera-operator.yaml
+	kubectl apply -f calico/calicoNetwork.yaml
+	kubectl apply -f calico/calicoctl.yaml
+	kubectl apply -f calico/cert-manager.yaml
+#	kubectl kudo init
+
+
+.PHONY: cert-manager-v1.19
+cert-manager-v1.19:
+	mkdir -p ${HOME}/gopath
+	go get k8s.io/kubernetes || true
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.0-rc.4
+	go get sigs.k8s.io/kind
+	export PATH=${HOME}/bin:${PATH}
+#     Node image
+	kind build node-image --image=master
 	kind delete cluster
 	kind create cluster --config calico/kind-calico.yaml
 	kubectl apply -f calico/ingress-nginx.yaml
