@@ -43,7 +43,7 @@ cert-manager-v1.19:
 #     Node image
 	kind build node-image --image=master
 	kind delete cluster
-	kind create cluster --config calico/kind-calico.yaml
+	kind create cluster --image=master --config calico/kind-calico.yaml
 	kubectl apply -f calico/ingress-nginx.yaml
 	kubectl apply -f calico/tigera-operator.yaml
 	kubectl apply -f calico/calicoNetwork.yaml
