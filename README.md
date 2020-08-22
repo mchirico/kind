@@ -1,6 +1,7 @@
 ![Kind Calico](https://github.com/mchirico/kind/workflows/Kind%20Calico/badge.svg)
 ![Kind CertManager](https://github.com/mchirico/kind/workflows/Kind%20CertManager/badge.svg)
 ![Kind Kudo](https://github.com/mchirico/kind/workflows/Kind%20Kudo/badge.svg)
+![Kind CertManager v1.19](https://github.com/mchirico/kind/workflows/Kind%20CertManager%20v1.19/badge.svg)
 # kind
 
 
