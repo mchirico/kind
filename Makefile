@@ -16,6 +16,18 @@ calico:
 	kubectl apply -f calico/calicoctl.yaml
 
 
+.PHONY: jaeger
+jaeger:
+	kubectl create namespace observability 
+	kubectl create -f jaeger/jaegertracing.io_jaegers_crd.yaml # <2>
+	kubectl create -n observability -f jaeger/service_account.yaml
+	kubectl create -n observability -f jaeger/role.yaml
+	kubectl create -n observability -f jaeger/role_binding.yaml
+	kubectl create -n observability -f jaeger/operator.yaml
+	kubectl create -f jaeger/cluster_role.yaml
+	kubectl create -f jaeger/cluster_role_binding.yaml
+
+
 .PHONY: calicoctl
 calicoctl:
 	 kubectl exec -ti -n kube-system calicoctl -- /calicoctl get profiles -o wide
