@@ -4,11 +4,19 @@
 ![Kind CertManager v1.19](https://github.com/mchirico/kind/workflows/Kind%20CertManager%20v1.19/badge.svg)
 # kind
 
+Example k8s clusters using [`kind`](https://kind.sigs.k8s.io/), put into a Makefile.
 
 ## Kind with Calico and Nginx Ingress
 
 ```
 make calico
+```
+
+
+## Example compiling kubernetes source with cert manager
+
+```
+make cert-manager-v1.19
 ```
 
 
@@ -25,16 +33,3 @@ docker exec -it kind-control-plane  /bin/bash
 
 ```
 
-## Metrics
-
-Ref: https://docs.aws.amazon.com/eks/latest/userguide/prometheus.html
-
-```
-kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.3.6/components.yaml
-
-kubectl create namespace prometheus
-helm install prometheus stable/prometheus \
-    --namespace prometheus
-
-
-```
