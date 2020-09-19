@@ -30,7 +30,7 @@ ETCDCTL_API=3 etcdctl \
 ```
 
 
-
+Example usage:
 ```
 etcdctl.sh get /registry/secrets/default/default-token-th4rf
 ```
