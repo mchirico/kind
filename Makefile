@@ -24,7 +24,7 @@ calico:
 
 .PHONY: jaeger
 jaeger:
-	kubectl create namespace observability 
+	kubectl create namespace observability
 	kubectl create -f jaeger/jaegertracing.io_jaegers_crd.yaml # <2>
 	kubectl create -n observability -f jaeger/service_account.yaml
 	kubectl create -n observability -f jaeger/role.yaml
@@ -55,7 +55,7 @@ cert-manager:
 cert-manager-v1.19:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
-	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.3 || git pull
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.2 || git pull
 	go get sigs.k8s.io/kind
 	export PATH=${HOME}/bin:${PATH}
 #     Node image
@@ -75,7 +75,7 @@ cert-manager-v1.19:
 pvc:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
-	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.3
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.2
 	go get sigs.k8s.io/kind
 	export PATH=${HOME}/bin:${PATH}
 #     Node image
