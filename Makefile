@@ -75,7 +75,7 @@ cert-manager-v1.19:
 pvc:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
-	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.2
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.3
 	go get sigs.k8s.io/kind
 	export PATH=${HOME}/bin:${PATH}
 #     Node image
