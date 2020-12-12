@@ -51,11 +51,11 @@ cert-manager:
 #	kubectl kudo init
 
 
-.PHONY: cert-manager-v1.19
-cert-manager-v1.19:
+.PHONY: cert-manager-v1.20
+cert-manager-v1.20:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
-	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.2 || git pull
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.20.1-rc.1 || git pull
 	go get sigs.k8s.io/kind
 	export PATH=${HOME}/bin:${PATH}
 #     Node image
