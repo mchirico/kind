@@ -51,8 +51,8 @@ cert-manager:
 #	kubectl kudo init
 
 
-.PHONY: cert-manager-v1.20
-cert-manager-v1.20:
+.PHONY: v1.20
+v1.20:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
 	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.20.1-rc.1 || git pull
@@ -61,7 +61,7 @@ cert-manager-v1.20:
 #     Node image
 	kind build node-image --image=master
 	kind delete cluster
-	kind create cluster --image=master --config calico/kind-calico.yaml
+	kind create cluster --image=master --config calico/kind-calico81.yaml
 	kubectl apply -f calico/ingress-nginx.yaml
 	kubectl apply -f calico/tigera-operator.yaml
 	kubectl apply -f calico/calicoNetwork.yaml
