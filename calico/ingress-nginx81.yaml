@@ -389,9 +389,9 @@ spec:
             failureThreshold: 3
           ports:
             - name: http
-              containerPort: 81
+              containerPort: 80
               protocol: TCP
-              hostPort: 81
+              hostPort: 80
             - name: https
               containerPort: 443
               protocol: TCP
