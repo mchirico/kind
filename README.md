@@ -64,3 +64,8 @@ docker exec -it kind-control-plane  /bin/bash
 
 ```
 
+## Prometheus
+
+```
+https://github.com/prometheus-operator/kube-prometheus
+```
