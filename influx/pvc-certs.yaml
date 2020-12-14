@@ -5,7 +5,7 @@ metadata:
 spec:
   storageClassName: manual
   accessModes:
-    - RWO
+    - ReadOnlyMany
   resources:
     requests:
       storage: 1Gi
