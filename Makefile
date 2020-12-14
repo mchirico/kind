@@ -110,7 +110,7 @@ pvc2:
 	kubectl apply -f calico/calicoctl.yaml
 	kubectl apply -f calico/cert-manager.yaml
 	sleep 20
-	kubectl apply -f pvc2/.
+#	kubectl apply -f pvc2/.
 
 
 
