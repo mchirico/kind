@@ -2,6 +2,8 @@ PROJECT = septapig
 NAME = kindstarter
 TAG = dev
 
+K8S_VERSION = v1.20.1-rc.1
+
 ifndef $(GOPATH)
   export GOPATH=${HOME}/gopath
   ${shell mkdir -p ${GOPATH}}
@@ -75,13 +77,33 @@ v1.20:
 pvc:
 	mkdir -p ${HOME}/gopath
 	go get k8s.io/kubernetes || true
-	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout v1.19.2
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout $(K8S_VERSION)
 	go get sigs.k8s.io/kind
 	export PATH=${HOME}/bin:${PATH}
 #     Node image
 	kind build node-image --image=master
 	kind delete cluster
 	kind create cluster --image=master --config calico/kind-calico-pvc.yaml
+	kubectl apply -f calico/ingress-nginx.yaml
+	kubectl apply -f calico/tigera-operator.yaml
+	kubectl apply -f calico/calicoNetwork.yaml
+	kubectl apply -f calico/calicoctl.yaml
+	kubectl apply -f calico/cert-manager.yaml
+	sleep 20
+	kubectl apply -f pvc/.
+
+
+.PHONY: pvc2
+pvc2:
+	mkdir -p ${HOME}/gopath
+	go get k8s.io/kubernetes || true
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout $(K8S_VERSION)
+	go get sigs.k8s.io/kind
+	export PATH=${HOME}/bin:${PATH}
+#     Node image
+	kind build node-image --image=master
+	kind delete cluster
+	kind create cluster --image=master --config calico/kind-calico-pvc2.yaml
 	kubectl apply -f calico/ingress-nginx.yaml
 	kubectl apply -f calico/tigera-operator.yaml
 	kubectl apply -f calico/calicoNetwork.yaml
