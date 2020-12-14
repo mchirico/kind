@@ -9,7 +9,7 @@ spec:
         claimName: 20g-pv-claim
     - name: certs-pv-storage
       persistentVolumeClaim:
-        claimName: 1g-pv-claim
+        claimName: 1g-pv-claim	
   containers:
     - name: task-pv-container
       image: "k8s.gcr.io/busybox"
@@ -21,4 +21,5 @@ spec:
         - mountPath: "/root/.influxdbv2"
           name: task-pv-storage
         - mountPath: "/certs"
-          name: certs-pv-storage
+          name: certs-pv-storage	  
+

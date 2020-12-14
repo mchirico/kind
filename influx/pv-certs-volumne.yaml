@@ -9,6 +9,6 @@ spec:
   capacity:
     storage: 1Gi
   accessModes:
-    - ReadWriteOnce
+    - ReadOnlyMany
   hostPath:
     path: "/pod-50g/influxdb/certs"
