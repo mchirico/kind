@@ -114,6 +114,27 @@ pvc2:
 
 
 
+.PHONY: influx
+influx:
+	mkdir -p ${HOME}/gopath
+	go get k8s.io/kubernetes || true
+	cd ${HOME}/gopath/src/k8s.io/kubernetes && git checkout $(K8S_VERSION)
+	go get sigs.k8s.io/kind
+	export PATH=${HOME}/bin:${PATH}
+#     Node image
+	kind build node-image --image=master
+	kind delete cluster
+	kind create cluster --image=master --config calico/kind-calico-pvc2.yaml
+	kubectl apply -f calico/ingress-nginx.yaml
+	kubectl apply -f calico/tigera-operator.yaml
+	kubectl apply -f calico/calicoNetwork.yaml
+	kubectl apply -f calico/calicoctl.yaml
+	kubectl apply -f calico/cert-manager.yaml
+	sleep 20
+#	kubectl apply -f pvc2/.
+
+
+
 
 
 
