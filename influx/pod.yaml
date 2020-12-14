@@ -12,11 +12,11 @@ spec:
         claimName: 1g-pv-claim	
   containers:
     - name: task-pv-container
-      image: "k8s.gcr.io/busybox"
-      command: ["/bin/sh", "-c","sleep 30000"]
+      image: "quay.io/influxdb/influxdb:v2.0.2"
+      command: ["/entrypoint.sh","--tls-cert=/certs/fullchain1.pem", "--tls-key=/certs/privkey1.pem"]
       ports:
-        - containerPort: 80
-          name: "http-server"
+        - containerPort: 8086
+          name: "influx-server"
       volumeMounts:
         - mountPath: "/root/.influxdbv2"
           name: task-pv-storage
