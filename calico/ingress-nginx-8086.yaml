@@ -286,10 +286,10 @@ metadata:
 spec:
   type: NodePort
   ports:
-    - name: http
+    - name: influx
       port: 8086
       protocol: TCP
-      targetPort: http
+      targetPort: 8086
     - name: https
       port: 443
       protocol: TCP
