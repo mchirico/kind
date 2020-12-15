@@ -145,8 +145,13 @@ dev:
 	kubectl apply -f calico/calicoNetwork.yaml
 	kubectl apply -f calico/calicoctl.yaml
 	kubectl apply -f calico/cert-manager.yaml
-	sleep 20
+	sleep 40
 #	kubectl apply -f pvc2/.
+	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+# On first install only
+	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+
 
 
 
