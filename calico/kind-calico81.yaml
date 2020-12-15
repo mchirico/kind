@@ -27,10 +27,6 @@ nodes:
     hostPort: 5001
     protocol: TCP
 - role: worker
-  extraPortMappings:
-  - containerPort: 8086
-    hostPort: 8086
-    protocol: TCP
   extraMounts:
   - hostPath: /tmp/hostpath_pv
     containerPath: /tmp/hostpath_pv
