@@ -15,7 +15,7 @@ metadata:
   name: influx-ingress
 spec:
   rules:
-  - http:
+  - https:
       paths:
       - path: /
         backend:
