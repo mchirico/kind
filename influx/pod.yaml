@@ -2,6 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: influx-pod
+  labels:
+    app: influx
 spec:
   volumes:
     - name: task-pv-storage
@@ -16,7 +18,7 @@ spec:
       command: ["/entrypoint.sh","--tls-cert=/certs/fullchain1.pem", "--tls-key=/certs/privkey1.pem"]
       ports:
         - containerPort: 8086
-          name: "influx-server"
+          name: "http-server"
       volumeMounts:
         - mountPath: "/root/.influxdbv2"
           name: task-pv-storage
