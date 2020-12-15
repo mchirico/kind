@@ -135,6 +135,21 @@ influx:
 
 
 
+.PHONY: dev
+dev:
+
+#     Node image
+	kind create cluster --image=master --config calico/kind-calico-pvc2.yaml
+	kubectl apply -f calico/ingress-nginx-8086.yaml
+	kubectl apply -f calico/tigera-operator.yaml
+	kubectl apply -f calico/calicoNetwork.yaml
+	kubectl apply -f calico/calicoctl.yaml
+	kubectl apply -f calico/cert-manager.yaml
+	sleep 20
+#	kubectl apply -f pvc2/.
+
+
+
 
 
 
