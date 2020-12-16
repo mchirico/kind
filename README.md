@@ -79,5 +79,5 @@ https://github.com/prometheus-operator/kube-prometheus
 ```
 apt-get update
 apt-get install net-tools
-
+apt install bridge-utils
 ```
