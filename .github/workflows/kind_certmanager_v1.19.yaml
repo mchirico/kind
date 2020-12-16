@@ -1,5 +1,5 @@
 
-name: Kind CertManager v1.19
+name: Kind v1.20
 
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
@@ -44,9 +44,9 @@ jobs:
         sudo mv ./kubectl /usr/bin/kubectl
  
     # Make
-    - name: make cert-manager-v1.19
+    - name: make v1.20
       run: |
-        make cert-manager-v1.19
+        make v1.20
 
 
    # Wait until ready
