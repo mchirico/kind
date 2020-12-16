@@ -62,10 +62,22 @@ kubectl exec -it node-starter-deploy-7d7b887466-gvrb7 -- /bin/sh
 docker exec -it kind-worker  /bin/bash
 docker exec -it kind-control-plane  /bin/bash
 
+# See tools below, for tools you'll need.
+
+
 ```
 
 ## Prometheus
 
 ```
 https://github.com/prometheus-operator/kube-prometheus
+```
+
+
+## Tools
+
+```
+apt-get update
+apt-get install net-tools
+
 ```
