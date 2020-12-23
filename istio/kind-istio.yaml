@@ -14,11 +14,11 @@ nodes:
       kubeletExtraArgs:
         node-labels: "ingress-ready=true"
   extraPortMappings:
-  - containerPort: 5000
-    hostPort: 5000
+  - containerPort: 5009
+    hostPort: 5009
     protocol: TCP
-  - containerPort: 5001
-    hostPort: 5001
+  - containerPort: 5091
+    hostPort: 5091
     protocol: TCP
 - role: worker
   extraMounts:

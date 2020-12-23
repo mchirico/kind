@@ -161,31 +161,12 @@ dev:
 
 
 
-
-.PHONY: dev
-dev:
-
-#     Node image
-	kind create cluster --image=master --config calico/kind-calico-pvc2.yaml
-	kubectl apply -f calico/ingress-nginx-8086.yaml
-	kubectl apply -f calico/tigera-operator.yaml
-	kubectl apply -f calico/calicoNetwork.yaml
-	kubectl apply -f calico/calicoctl.yaml
-	kubectl apply -f calico/cert-manager.yaml
-	sleep 40
-#	kubectl apply -f pvc2/.
-	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-	kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-# On first install only
-	kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
-
-
-
 .PHONY: istio
 istio:
 #     Node image
 	kind delete cluster --name istio
 	kind create cluster --name istio --image=master --config istio/kind-istio.yaml
+	istioctl install --set profile=demo -y
 
 ## These steps are for metallb
 #
