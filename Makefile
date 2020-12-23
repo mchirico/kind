@@ -136,6 +136,7 @@ influx:
 
 .PHONY: basic
 basic:
+	kind delete cluster --name basic
 	kind create cluster --name basic --image=master 
 #	kubectl apply -f pvc2/.
 
