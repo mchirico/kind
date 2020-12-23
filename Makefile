@@ -124,7 +124,7 @@ influx:
 #     Node image
 	kind build node-image --image=master
 	kind delete cluster
-	kind create cluster --image=master --config calico/kind-calico-pvc2.yaml
+	kind create cluster --name influx --image=master --config calico/kind-calico-pvc2.yaml
 	kubectl apply -f calico/ingress-nginx-8086.yaml
 	kubectl apply -f calico/tigera-operator.yaml
 	kubectl apply -f calico/calicoNetwork.yaml
