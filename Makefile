@@ -166,7 +166,9 @@ istio:
 #     Node image
 	kind delete cluster --name istio
 	kind create cluster --name istio --image=master --config istio/kind-istio.yaml
+#     istio
 	istioctl install --set profile=demo -y
+	kubectl label namespace default istio-injection=enabled
 
 ## These steps are for metallb
 #
