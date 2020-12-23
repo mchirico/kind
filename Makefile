@@ -134,6 +134,12 @@ influx:
 #	kubectl apply -f pvc2/.
 
 
+.PHONY: basic
+basic:
+	kind create cluster --name basic --image=master 
+#	kubectl apply -f pvc2/.
+
+
 
 .PHONY: dev
 dev:
