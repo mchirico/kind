@@ -1,0 +1,12 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: influx-service
+spec:
+  selector:
+    app: influx
+  ports:
+  # Default port used by the image
+  - port: 8086
+  type: LoadBalancer
+---
